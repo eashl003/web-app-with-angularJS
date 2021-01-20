@@ -1,36 +1,40 @@
 (function() {
 'use strict';
 
-angular.module('msgApp', [])
-.controller('MsgController', MsgController);
+angular.module('LunchCheck', [])
+.controller('LunchCheckController', LunchCheckController);
 
-MsgController.$inject = ['$scope'];
+LunchCheckController.$inject = ['$scope'];
 
-function MsgController($scope) {
-  $scope.items = '';
-  $scope.msgToUser = '';
-  $scope.checked = false;
+function LunchCheckController($scope) {
 
-  $scope.checkIfTooMuch = function() {
-    if ($scope.items.trim().length == 0) {
-      $scope.empty = true;
+  $scope.checkItems = function(){
+    var amount = countItems($scope.items);
+    $scope.message = generateMsg(amount);
+  };
 
-    } else {
-      $scope.checked = true;
-      $scope.empty = false;
-      var listItems = $scope.items.split(',');
-      var itemsTrimed = listItems.filter(function(i){
-        return i.trim() !== '';
-      });
-
-      if (itemsTrimed.length <= 3){
-        $scope.msgToUser = 'Enjoy!';
-      } else {
-        $scope.msgToUser = 'Too much!';
+  function countItems(items) {
+    var count = 0;
+    if (items) {
+      var array = items.split(',');
+      for (var i in array) {
+        if(array[i].trim().length != 0) {
+          count++;
+        }
       }
+    }
+    return count;
+  }
+
+  function generateMsg(amount) {
+    if (amount === 0) {
+      return 'Please enter data first';
+    }
+    else if (amount <= 3) {
+      return 'Enjoy!';
+    } else {
+      return 'Too much!';
     }
   }
 }
-
-
 })();
