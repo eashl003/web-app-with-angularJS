@@ -1,9 +1,12 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" ng-app='ShoppingListApp'> <!--added ng-app here-->
   <head>
     <title>Shopping List Check Off</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="styles/bootstrap.min.css">
+    <script src="angular.min.js"></script> <!--added angular.min.js here-->
+    <script src="app.js"></script> <!--added app.js here-->
+    <title>ng-repeat</title>
     <style>
       .emptyMessage {
         font-weight: bold;
@@ -21,20 +24,28 @@
         color: green;
       }
     </style>
+    <!--<title>ng-repeat</title>-->
   </head>
 <body>
-  <div class="container">
+  <div class="container" ng-controller='ToBuyListController'>
   <h1>Shopping List Check Off</h1>
 
   <div class="row">
 
     <!-- To Buy List -->
-    <div class="col-md-6">
+    <div class="col-md-6" ng-controller='ToBuyListController'>
      <h2>To Buy:</h2>
+     <!--<input type="text" ng-model="toBuyList[0].quantity">-->
      <ul>
-       <li>Buy 10 cookies <button class="btn btn-default"><span class="glyphicon glyphicon-ok"></span> Bought</button></li>
-       <li>Buy 10 cookies <button class="btn btn-default"><span class="glyphicon glyphicon-ok"></span> Bought</button></li>
+        <li ng-repeat="item in toBuyList">{{$index + 1}}. Buy {{item.quantity}} of {{item.name}}(s)</li>
+       <!-- li>Buy 10 cookies <button class="btn btn-default"><span class="glyphicon glyphicon-ok"></span> Bought</button></li>-->
+       <!-- li>Buy 10 cookies <button class="btn btn-default"><span class="glyphicon glyphicon-ok"></span> Bought</button></li>-->
+
      </ul>
+     <input type="text" ng-model="newItemName" placeholder="item name">
+     <input type="text" ng-model="newItemQuantity" placeholder="item quantity">
+     <button ng-click="addToList()">Add to List</button>
+
      <div class="emptyMessage">Everything is bought!</div>
     </div>
 
