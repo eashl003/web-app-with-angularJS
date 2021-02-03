@@ -4,7 +4,7 @@
 angular.module('NarrowItDownApp', [])
 .controller('NarrowItDownController', NarrowItDownController)
 .service('MenuSearchService', MenuSearchService)
-.directive('foundItems', FoundItems); // 1st argument: normalized name that'll appear in HTML, 2nd is factory function which returns DDO
+.directive('foundItems', FoundItemsDirective); // 1st argument: normalized name that'll appear in HTML, 2nd is factory function which returns DDO
 
 // NarrowItDownController is injected with MenuSearchService
 NarrowItDownController.$inject['MenuSearchService'];
@@ -18,7 +18,7 @@ function NarrowItDownController(MenuSearchService){
 
 // define factory function for custom directive
 //FoundItems.$inject = []; // inject other services here such as a service
-function FoundItems() {
+function FoundItemsDirective() {
   var ddo = {
     template: 'foundItems.html',
     Restrict: 'E',
