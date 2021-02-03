@@ -20,8 +20,15 @@ function NarrowItDownController(MenuSearchService){
 //FoundItems.$inject = []; // inject other services here such as a service
 function FoundItemsDirective() {
   var ddo = {
-    template: 'foundItems.html',
-    Restrict: 'E',
+    templateUrl: 'foundItems.html',
+    scope: {
+      items: '<',
+      myTitle: '@title',
+      onRemove: '&'
+    },
+    contorller: NarrowItDownController,
+    controllerAs: 'list',
+    bindToController: true
   };
   return ddo;
 }
